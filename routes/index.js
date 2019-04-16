@@ -9,11 +9,9 @@ var cookieParser = require('cookie-parser');
 var cookieSignature = require('cookie-signature');
 var DateKey = cookieSignature.sign('server',String(ServerStartDate));
 var ServerStartDate = new Date;
-/* GET home page.
-router.get('/', function(req, res, next) {
-  res.sendFile("/views/index.html", { root: "." });
+router.get('/', function(req, res){
+res.render('encodeblock', {title: 'Pharao/Rot13 Encoder/Decoder',extra:""});
 });
-*/
 
 router.get('/redirect', function(req, res){
 res.render('encodeblock', {title: 'encoder',extra:""});
@@ -48,7 +46,8 @@ db.serialize(function(){
             else
             {
               console.log("wrong pw")
-              res.render('outside/loginerr', {title : 'login failed', extra:"wrong username or password"});
+              res.render('outside/loginform', {title : 'login failed', extra:"wrong username or password"});
+
             }
           }
 
