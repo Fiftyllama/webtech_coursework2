@@ -1,0 +1,16 @@
+extends layout.pug
+
+block scripts
+  script(src='javascripts/codeRing.js')
+
+
+block content
+  #input_area
+    textarea#message(rows='8', cols='85', autofocus='') rats live on no evil star
+    br
+    button#encode_button(type='button', onclick='SelectorEnc()') Encode
+    button#Decode_button(type='button', onclick='SelectorDec()') Decode
+  form
+    select#select_area
+      option(value='pharao') Pharao
+      option(value='rot13') Rot13

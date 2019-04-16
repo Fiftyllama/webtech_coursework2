@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <title>Pharao Encoder</title>
+  <body>
+      <h1>Pharao/Rot13 Encoder/Decoder</h1><form action="/login" method = "POST">
+        username: <input type="text" name="username"></input>
+        password: <input type="password" name="password"></input>
+        <input type="submit" name="Login"></input><br>
+      </form>
+
+
+
+      <div id="input_area">
+        <textarea rows="8" cols="85" autofocus id="message">rats live on no evil star</textarea> <br>
+        <button type="button" onclick="SelectorEnc()" id="encode_button">Encode</button>
+        <button type="button" onclick="SelectorDec()" id="Decode_button">Decode</button>
+      </div>
+
+      <form>
+        <select id="select_area">
+          <option value = "pharao">Pharao</option>
+          <option value = "rot13">Rot13</option>
+        </select>
+      </form>
+      <br>
+
+
+      <div>
+      <script type="text/javascript" src="javascripts/codeRing.js"></script>
+    </div>
+
+      <br>
+      <br>
+      <br>
+
+      <form method="get" action="/register">
+        <button type="register">Continue</button>
+      </form>
+
+
+
+
+    </body>
+  </html>

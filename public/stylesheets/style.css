@@ -1,0 +1,13 @@
+html {
+  background-color:#282828
+}
+body {
+
+  color:#a89984 ; background-color:#282828
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h1 {color:#ebdbb2; background-color:#282828} /*gruvbox orange*/
+h2 {color:#ebdbb2; background-color:#282828} /*gruvbox orange*/
+textarea {color:#f9f5d7; background-color:#282828} /*gruvbox red*/
