@@ -1,0 +1,26 @@
+extends layout.pug
+
+block scripts
+  script(src='javascripts/codeRing.js')
+
+
+block content
+  form(action='/users', method='POST')
+    textarea(id="message",name="message",rows='8', cols='85', autofocus='') rats live on no evil star
+    br
+    select#select_area
+      option(value='pharao') Pharao
+      option(value='rot13') Rot13
+    button#encode_button(type='button', onclick='SelectorEnc()') Encode
+    button#Decode_button(type='button', onclick='SelectorDec()') Decode
+    select(name='dropDown', id='users')
+      each val in userlist
+        option=val
+    input(type='submit', name='send', id='send')
+    
+  each val in messages
+    br
+    each i in val
+      each c in i
+        p=c
+        

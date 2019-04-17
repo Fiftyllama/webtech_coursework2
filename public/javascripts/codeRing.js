@@ -1,7 +1,7 @@
 
 function addMessage(message,number){
   document.getElementById("message").value = message //adds two stings and output formating to the html
-  document.getElementById("output").value = message //adds two stings and output formating to the html
+  //document.getElementById("output").value = message //adds two stings and output formating to the html
 }
 
 

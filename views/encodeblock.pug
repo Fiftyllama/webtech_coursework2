@@ -10,15 +10,17 @@ block content
     br
     button#encode_button(type='button', onclick='SelectorEnc()') Encode
     button#Decode_button(type='button', onclick='SelectorDec()') Decode
-    button#Send(type='button', onlick='') Send
+    //button#Send(type='button', onlick='') Send
   form
     select#select_area
       option(value='pharao') Pharao
       option(value='rot13') Rot13
       #output_area
-    p
-      #output
-    div
 
-  form(action='/login', method='get')
-    input(type='submit', name='login') 
+
+  form(action='/login', method='POST')
+    p Login
+    input(type='text', name='username')
+    br
+    input(type='password', name='password')
+    input(type='submit', name='login')

@@ -18,7 +18,7 @@ res.render('encodeblock', {title: 'encoder',extra:""});
 });
 
 router.get("/login", function(req, res) {
-  res.render('outside/loginform', {title: 'login',extra:""});
+  res.render('loginform', {title: 'login',extra:""});
 
 });
 
@@ -27,7 +27,7 @@ router.post("/login", function(req, res) {
   console.log(usernames);
 	var userpassword=req.body.password;
   console.log(userpassword);
-  var usercookie = "null"
+  var usercookie = cookieSignature.sign('username', usernames) + '-' + DateKey;
 db.serialize(function(){
   	db.get(`select distinct * from User where UsrID = '${usernames}'`, function(err,result,row)
     {
@@ -37,17 +37,16 @@ db.serialize(function(){
       }
           else if(result)
           {
-            console.log(result.Pwd)
+
             if (userpassword == result.Pwd)
               {
               db.run(`update User set cookie = '${usercookie}' where UsrID = '${usernames}'`);
-              res.redirect('/users')
+              res.setHeader('Set-Cookie',cookie.serialize('UserInfo',usercookie,{maxAge:60*60*24}));
+              res.redirect('/users');
               }
             else
             {
-              console.log("wrong pw")
               res.render('outside/loginform', {title : 'login failed', extra:"wrong username or password"});
-
             }
           }
 
@@ -56,7 +55,16 @@ db.serialize(function(){
 });
 
 router.get("/test", function(req,res){
-  res.render('encodeblock', {title: 'encoder',extra:""});
+
+  var usrlist = []
+  db.all(`select UsrID from User`, function(err,result){
+    var len = Object.keys(result).length;
+    for(var i = 0; i < 5; i++){
+        usrlist.push(Object.values(result[i]));
+  }
+  res.render('inside/usersSelect', {userlist: usrlist});
+  });
+
 
 });
 
@@ -67,11 +75,13 @@ router.get("/register", function(req,res){
 });
 router.post('/register', function(req,res)
 {
-	var usernames=req.body.username;
+
+  var usernames=req.body.username;
   console.log(usernames)
 	var userpassword=req.body.password;
   console.log(userpassword);
-  var usercookie = "null"
+  var usercookie = cookieSignature.sign('username', usernames) + '-' + DateKey;
+
 	db.serialize(function(){
 		//'${usernames}'
 		db.get(`select distinct * from User where UsrID = '${usernames}'`, function(err,result,row)
@@ -79,15 +89,17 @@ router.post('/register', function(req,res)
 				if(err)
 				{
 					throw err;
-					console.log(result);
+
 				}
 				else if(result){
-					res.render('outsideregisterr', { title: 'Signup Failed',extra:"username already in use"});
+					res.render('outside/registerr', { title: 'Signup Failed',extra:"username already in use"});
 				}
 				else
 				{
 					db.run(`insert into User(UsrID,Pwd,cookie) values ('${usernames}','${userpassword}','${usercookie}')`);
-					res.render('index', { title: 'register Sucessful'});
+          db.run(`update User set cookie = '${usercookie}' where UsrID = '${usernames}'`);
+          res.setHeader('Set-Cookie',cookie.serialize('UserInfo',usercookie,{maxAge:60*60*24}));
+          res.redirect('/users');
 				}
 			})
 
