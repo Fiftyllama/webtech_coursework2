@@ -6,7 +6,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var dbPath = path.resolve(__dirname,'testing.db');
+var dbPath = path.resolve(__dirname,'test.db');
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(dbPath);
 

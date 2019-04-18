@@ -5,6 +5,7 @@ block scripts
 
 
 block content
+  
   form(action='/users', method='POST')
     textarea(id="message",name="message",rows='8', cols='85', autofocus='') rats live on no evil star
     br
@@ -17,7 +18,7 @@ block content
       each val in userlist
         option=val
     input(type='submit', name='send', id='send')
-    
+  a(href='users/logout') Logout  
   each val in messages
     br
     each i in val
